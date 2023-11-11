@@ -12,7 +12,7 @@ public class CharacterState : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))              //<-Cambio di stato                                   
         {                                                     //Dopo questo dovrai scrivere il tuo codice per cambiarlo                                   
