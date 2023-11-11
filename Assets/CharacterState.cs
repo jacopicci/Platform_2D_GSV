@@ -5,10 +5,11 @@ using UnityEngine;
 public class CharacterState : MonoBehaviour
 {
     bool isLightState;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -20,7 +21,9 @@ public class CharacterState : MonoBehaviour
         }                                                     //
     }                                                         //
     void changeState()                                        //Concept dalla riunione:
-    {                                                         //Il protagonista dovrebbe diventare più lento, ma se prende velocità può distruggere alcuni oggetti
+    {                     
+        //Il protagonista dovrebbe diventare più lento, ma se prende velocità può distruggere alcuni oggetti
+        rb.mass= 100;
         isLightState = !isLightState;                         //inoltre dovrà essere anche più leggero, in modo da poter rimbalzare 
     }                                                         //aumentando l'altezza del salto cambiando forma in aria
 }
