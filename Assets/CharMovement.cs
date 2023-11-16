@@ -101,5 +101,8 @@ public class CharMovement : MonoBehaviour
             
 
     }
+    void Explode()
+    {
 
+    }
 }
