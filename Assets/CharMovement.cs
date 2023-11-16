@@ -41,7 +41,7 @@ public class CharMovement : MonoBehaviour
             vettoreMovimento.x += speed * Time.deltaTime;
             isMoving = true;
         }
-        if (Input .GetKeyDown(KeyCode.Space) && !isAirborne)
+        if ((Input .GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && !isAirborne)
         {
             jump=true;
         }
