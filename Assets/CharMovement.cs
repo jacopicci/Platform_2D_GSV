@@ -11,13 +11,15 @@ public class CharMovement : MonoBehaviour
     [SerializeField] float AirbornSpeedDivisor;
 
     Vector3 vettoreMovimento = new Vector3(0, 0, 0);
+    Vector3 jumpingForce;
     Vector3 drag;
+
     Rigidbody rb;
     bool isMoving;
     bool isAirborne;
     bool jump;
+    bool isMenuOpen;
     
-    Vector3 jumpingForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,25 +29,27 @@ public class CharMovement : MonoBehaviour
 
     void Update()
     {
-        CheckForGround();
-        isMoving = false;
-        
-        if (Input.GetKey(KeyCode.A))
+        if (!isMenuOpen)
         {
-            vettoreMovimento.x -= speed * Time.deltaTime;
-            isMoving = true;
-        }
+            CheckForGround();
+            isMoving = false;
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            vettoreMovimento.x += speed * Time.deltaTime;
-            isMoving = true;
-        }
-        if ((Input .GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && !isAirborne)
-        {
-            jump=true;
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                vettoreMovimento.x -= speed * Time.deltaTime;
+                isMoving = true;
+            }
 
+            if (Input.GetKey(KeyCode.D))
+            {
+                vettoreMovimento.x += speed * Time.deltaTime;
+                isMoving = true;
+            }
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && !isAirborne)
+            {
+                jump = true;
+            }
+        }
 
     }
     void FixedUpdate()
@@ -101,8 +105,8 @@ public class CharMovement : MonoBehaviour
             
 
     }
-    void Explode()
+    public void IsMenuOpen()
     {
-
+        isMenuOpen = !isMenuOpen;
     }
 }
