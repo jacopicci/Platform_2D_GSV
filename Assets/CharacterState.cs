@@ -4,44 +4,55 @@ using UnityEngine;
 
 public class CharacterState : MonoBehaviour
 {
-    bool isLightState;
-    Rigidbody rb;
-    // Start is called before the first frame update
+    
+    bool isLightState = false;
+    private Rigidbody rb;
+    private float originalGravity;
+    //Moltiplicatore per aumentare la gravità
+    [SerializeField] float heavyGravityMultiplier = 2.0f;  
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        originalGravity = Physics.gravity.y; 
     }
 
-    // Update is called once per frame
-    void Update() 
+    
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))              //<-Cambio di stato                                   
-        {                                                     //Dopo questo dovrai scrivere il tuo codice per cambiarlo                                   
-            changeState();                                    //Ti consiglio di creare due funzioni (come nell'esempio qui sotto), una per ogni stato                                  
-        }                                                     //
-    }                                                         //
-    void changeState()                                        //Concept dalla riunione:
-    {                     
-                                                              //Il protagonista dovrebbe diventare più lento, ma se prende velocità può distruggere alcuni oggetti
-        rb.mass = 100;
-        isLightState = !isLightState;                         //switchando dovrà diventare più leggero, in modo da poter andare più in alto 
-        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ChangeState();
+        }
+    }
+
+    void ChangeState()
+    {
+        isLightState = !isLightState;
+
         if (isLightState)
         {
-            lightState();
+            LightState();
         }
         else
         {
-            heavyState();
+            HeavyState();
         }
-    }                                                         //aumentando l'altezza del salto cambiando forma in aria
-
-    void lightState()
-    {
-
     }
-    void heavyState()
-    {
 
+    void LightState()
+    {
+        //Ripristina la gravità originale
+        Physics.gravity = new Vector3(0, originalGravity, 0);
+      
+    }
+
+    void HeavyState()
+    {
+        //La gravità viene sostituita da un vettore che ha come y la gravità originale moltiplicata
+        Physics.gravity = new Vector3(0, originalGravity * heavyGravityMultiplier, 0);
+        
     }
 }
+
+
