@@ -17,11 +17,9 @@ public class CharMovement : MonoBehaviour
     bool isAirborne;
     bool jump;
     
-    Vector3 jumpingForce;
     // Start is called before the first frame update
     void Start()
     {
-        jumpingForce = new Vector3(0,jumpingHeight,0);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -29,19 +27,30 @@ public class CharMovement : MonoBehaviour
     {
         CheckForGround();
         isMoving = false;
-        
-        if (Input.GetKey(KeyCode.A))
+
+        if (Input.GetKey(KeyCode.A) && isAirborne)
+        {
+            vettoreMovimento.x -= speed * Time.deltaTime * 2;
+            isMoving = true;
+        }
+        else if (Input.GetKey(KeyCode.A))
         {
             vettoreMovimento.x -= speed * Time.deltaTime;
             isMoving = true;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && isAirborne)
+        {
+            vettoreMovimento.x += speed * Time.deltaTime * 2;
+            isMoving = true;
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             vettoreMovimento.x += speed * Time.deltaTime;
             isMoving = true;
         }
-        if ((Input .GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && !isAirborne)
+        
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && !isAirborne)
         {
             jump=true;
         }
@@ -52,7 +61,6 @@ public class CharMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            
             if (Mathf.Abs(rb.velocity.x) < maxSpeed)
             {
                 if (!isAirborne)
@@ -79,7 +87,7 @@ public class CharMovement : MonoBehaviour
     {
         if (jump)
         {
-            rb.AddForce(jumpingForce, ForceMode.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpingHeight);
             jump = false;
         }
     }
@@ -97,9 +105,6 @@ public class CharMovement : MonoBehaviour
                 isAirborne = false;
             }
         }
-       
-            
-
     }
     void Explode()
     {
