@@ -8,7 +8,7 @@ public class CharMovement : MonoBehaviour
     [SerializeField] float maxSpeed;
     [SerializeField] float jumpingHeight;
     [SerializeField] float raycastDistance;
-    [SerializeField] float AirbornSpeedDivisor;
+    [SerializeField] float AirborneSpeedDivisor;
 
     Vector3 vettoreMovimento = new Vector3(0, 0, 0);
     Vector3 drag;
@@ -61,7 +61,7 @@ public class CharMovement : MonoBehaviour
                 }
                 else
                 {
-                    rb.velocity += vettoreMovimento / AirbornSpeedDivisor;
+                    rb.velocity += vettoreMovimento / AirborneSpeedDivisor;
                 }
             }        
         }
