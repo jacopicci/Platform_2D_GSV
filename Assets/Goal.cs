@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    [SerializeField] GameObject nextSpawn;
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.position = nextSpawn.transform.position;
+        }
     }
 }
