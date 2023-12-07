@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    [SerializeField] float padBounciness;
+    [SerializeField] public float padBounciness;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector2.up * padBounciness, ForceMode.Impulse);
+            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+            rb.AddForce(Vector3.up * padBounciness * rb.mass, ForceMode.Impulse);
         }
     }
 }

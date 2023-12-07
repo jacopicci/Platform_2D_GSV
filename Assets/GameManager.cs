@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPausa;
     [SerializeField] TextMeshProUGUI testoTentativi;
     [SerializeField] TextMeshProUGUI testoMonetine;
+    [SerializeField] List<GameObject> SpawnPointList;
     private int tentativi;
     private int monetine;
     private int livello;
     private bool stato;
+    private int stage;
 
     void Start()
     {
@@ -38,5 +40,20 @@ public class GameManager : MonoBehaviour
     {
         tentativi++;
         testoTentativi.text = "Tentativi: " + tentativi.ToString();
+        player.transform.position = SpawnPointList[stage].transform.position;
+    }
+    public void NextStage()
+    {
+        stage = 1;
+
+        //stage++;
+        /*if (stage > 1)
+        {
+            player.GetComponent<CharacterState>().bCanChangeState=true;
+        }*/
+        if (stage == 1)
+        {
+            player.GetComponent<CharacterState>().SetHeavyState();
+        }
     }
 }

@@ -19,7 +19,6 @@ public class Deathbox : MonoBehaviour
         {
             gameManager.AddTentativo();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            player.transform.position = startingPos;
         }
     }
 }
